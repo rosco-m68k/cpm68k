@@ -1,0 +1,8 @@
+SUBS := m68000
+
+all clean: $(SUBS) FORCE
+
+$(SUBS): FORCE
+	$(MAKE) -C $@ $(MAKECMDGOALS)
+	
+FORCE:
