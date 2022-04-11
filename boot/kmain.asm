@@ -14,6 +14,6 @@ kmain::
                     JMP     0x15000                                     ; hard code the cpm start address
                     RTS                                                 ; code never gets here
                     
-                    incbin "../../cpmfs/target/boot15k.sr.bin"         ; include the CPM bios and boot file so it relocated
+                    incbin "../cpmfs/target/boot15k.sr.bin"         ; include the CPM bios and boot file so it relocated
 
 strBootMsg:         dc.b   "CPM68k boot manager for rosco_m68k v0.1", 0

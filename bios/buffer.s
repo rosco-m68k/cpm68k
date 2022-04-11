@@ -332,7 +332,7 @@ writeHDDSector:     MOVEM.L   %D0-%D4/%A0-%A2,-(%SP)
                     LSR.L     #8,%D2                                  | Drive into lower byte of upper word
                     MOVE.W    #1,%D2                                  | Sectors to write in lower word
 
-                    MOVE.W    #SPI_WRITE,%D0 
+                    MOVE.W    #SPI_WRITE,%D0
                     TRAP      #SPI_TRAP
 
                     MOVEM.L   (%SP)+,%D0-%D4/%A0-%A2
