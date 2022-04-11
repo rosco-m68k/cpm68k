@@ -34,9 +34,7 @@ GCC_LIBS=$(shell $(CC) --print-search-dirs 															\
 	| sed 's/:/m68000\/ -L/g')m68000/
 
 LD       = m68k-elf-ld
-#LDFLAGS  += -L../../fat/target
-#LDFLAGS  += -L../../baselibc/target
-LDFLAGS   = -T $(LDSCRIPT) -L $(SYSLIBDIR) --gc-sections --oformat=elf32-m68k
+LDFLAGS   = -L $(SYSLIBDIR) --gc-sections --oformat=elf32-m68k
 LDFLAGS  += $(GCC_LIBS)
 
 DEFINES=-DROSCO_M68K
@@ -53,27 +51,7 @@ OBJCOPY = m68k-elf-objcopy
 SIZE = m68k-elf-size
 NM = m68k-elf-nm
  
-IO_AS_SRC = $(wildcard ../io/*.s)
-IO_AS_OBJ = $(patsubst ../io/%.s, obj/io/%.o, $(IO_AS_SRC))
-
-LIB_AS_SRC = $(wildcard ../lib/*.s)
-LIB_AS_OBJ = $(patsubst ../lib/%.s, obj/lib/%.o, $(LIB_AS_SRC))
-
-SREC_AS_SRC = $(wildcard ../s-record/*.s)
-SREC_AS_OBJ = $(patsubst ../s-record/%.s, obj/s-record/%.o, $(SREC_AS_SRC))
-
-OBS = $(LIB_AS_OBJ) $(IO_AS_OBJ) $(SREC_AS_OBJ) 
-
 all: target/boot.bin
-
-obj/io/%.o:	../io/%.s | obj/io
-	$(AS) $(ASFLAGS) -a=$(@:.o=.lst) -o $@ $<
-
-obj/lib/%.o:	../lib/%.s | obj/lib
-	$(AS) $(ASFLAGS) -a=$(@:.o=.lst) -o $@ $<
-
-obj/s-record/%.o:	../s-record/%.s | obj/s-record
-	$(AS) $(ASFLAGS) -a=$(@:.o=.lst) -o $@ $<
 
 # --------------------------------------------------------------------------------
 # M68000 CPM Boot Loader
@@ -81,10 +59,10 @@ obj/s-record/%.o:	../s-record/%.s | obj/s-record
 obj/kmain.o: kmain.asm | obj
 	$(VASM) $(VASMFLAGS) -L $(basename $@).lst -o $@ $<
 
-obj/boot.elf: obj/kmain.o $(OBS) | obj
-	#$(LD) $(LDFLAGS) -T boot.lnk obj/kmain.o $(OBS) $(LIBS) -Map $(@:.srec=.map) -o $@
-	#$(LD) $(LDFLAGS) obj/kmain.o $(OBS) $(LIBS) -Map $(@:.srec=.map) -o $@
-	$(LD) $(LDFLAGS) obj/kmain.o $(OBS) $(LIBS) -o $@
+obj/boot.elf: obj/kmain.o | obj
+	cp $(LDSCRIPT) obj/rosco.ld
+	cat obj/rosco.ld | sed -e 's/^ram.*/ram = 0x00015000;/' > obj/boot.ld
+	$(LD) -T obj/boot.ld $(LDFLAGS) obj/kmain.o $(LIBS) -o $@
 	$(NM) --numeric-sort $@ > obj/boot.sym
 	$(SIZE) $@
 	-chmod a-x $@
@@ -96,15 +74,6 @@ clean:
 	rm -rf obj/* target/*
 
 obj:
-	mkdir -p $@
-
-obj/io: obj
-	mkdir -p $@
-
-obj/lib: obj
-	mkdir -p $@
-
-obj/s-record: obj
 	mkdir -p $@
 
 target:
