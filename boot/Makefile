@@ -60,9 +60,9 @@ obj/kmain.o: kmain.asm | obj
 	$(VASM) $(VASMFLAGS) -L $(basename $@).lst -o $@ $<
 
 obj/boot.elf: obj/kmain.o | obj
-	cp $(LDSCRIPT) obj/rosco.ld
-	cat obj/rosco.ld | sed -e 's/^ram.*/ram = 0x00015000;/' > obj/boot.ld
-	$(LD) -T obj/boot.ld $(LDFLAGS) obj/kmain.o $(LIBS) -o $@
+	#cp $(LDSCRIPT) obj/rosco.ld
+	#cat obj/rosco.ld | sed -e 's/^ram.*/ram = 0x00014F38;/' > obj/boot.ld # HACK do we need to change ram size
+	$(LD) -T $(LDSCRIPT) $(LDFLAGS) obj/kmain.o $(LIBS) -o $@
 	$(NM) --numeric-sort $@ > obj/boot.sym
 	$(SIZE) $@
 	-chmod a-x $@

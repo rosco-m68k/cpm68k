@@ -2,7 +2,7 @@ OUTPUT_FORMAT(srec)
 
 MEMORY
 {
-    ram : ORIGIN = 0x1A1C0, LENGTH = 0xDDE40 /* Load BIOS above CPM. Can use all memory up to 0xF8000 (1Mb) */
+    ram : ORIGIN = 0x1B000, LENGTH = 0xDD000 /* Load BIOS above CPM at 1B000 where CPM expects. Can use all memory up to 0xF8000 (1Mb) */
 }
 
 SECTIONS

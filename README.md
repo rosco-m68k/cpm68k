@@ -12,3 +12,5 @@ Links to documents on cpm68k and David Wildie's work on a S100 SBC on which this
 http://www.s100computers.com/Software%20Folder/CPM68K/CPM68K%20Software.htm
 https://github.com/dwildie/cpm-68k
 
+General info, hints and tips:
+https://www.retrobrewcomputers.org/forum/index.php?t=msg&th=222&goto=3703&
