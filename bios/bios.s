@@ -47,8 +47,17 @@ in_2:               LEA       handler,%A0
                     LEA       errNoSDCardMsg,%A0                      | Display error message, but continue ...
                     BSR       puts
 
-in_3:               CLR.L     %D0                                     | log on disk A, user 0
+in_3:               MOVE.W    #SPI_INIT,%D0                           | Get SD Card details
+                    LEA       SD_CARD,%A1 
+                    TRAP      #SPI_TRAP
+                    CMP.L     #0,%D0
+                    BEQ       in_4
 
+                    LEA       errSDCardInitMsg,%A0                    | Display error message, but continue ...
+                    BSR       puts
+   
+in_4:               
+                    CLR.L     %D0                                     | log on disk A, user 0
                     RTS
 
 *--------------------------------------------------------------------------------
@@ -475,4 +484,9 @@ strInit:            .ascii    "CPM68k boot manager for rosco_m68k v0.1 [CPM]"
 
 errNoSDCardMsg:     .ascii    "Error: No SD Card Support detected"
                     DC.B      0
+
+errSDCardInitMsg:   .ascii    "Error: Failed to start SD Card support"
+                    DC.B      0
+
+SD_CARD:            DS.B      50 | Hack, this is longer than required
           .end

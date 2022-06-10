@@ -8,7 +8,7 @@ SPI_READ            =         0x2                                     | Function
 SPI_WRITE           =         0x3                                     | Function 3: write block 
 SPI_READ_REGISTER   =         0x4                                     | Function 4: read sd card register
 
-IO_SENDCHAR         =         0x2                                     | Function 2: Print a character
+IO_SENDCHAR         =         0x4                                     | Function 2: Print a character
 IO_RECVCHAR         =         0x3                                     | Function 3: Receive a character
 IO_CHECKCHAR        =         0x6                                     | Function 6: Check is character at console
 

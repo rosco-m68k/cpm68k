@@ -12,7 +12,7 @@ CCFLAGS += -nodefaultlibs
 
 LD       = m68k-elf-ld
 
-all: target/bios.srec obj/ldr.srec target/ldbios.s target/bios.s target/buffer.s
+all: target/bios.sr.bin target/bios.srec obj/ldr.srec target/ldbios.s target/bios.s target/buffer.s
 
 %.s:	%.c
 	$(CC) $(CCFLAGS) -S $<
@@ -31,6 +31,9 @@ obj/ldr.srec: obj/ldbios.o | obj
 target/bios.srec: obj/bios.srec | target
 	srec_cat $< -fill 0x00 -over $< -header="CP/M-68K rosco_m68k BIOS V0.1" -o $@
 	srec_info $@
+
+target/bios.sr.bin: target/bios.srec | target
+	m68k-elf-objcopy -I srec -O binary target/bios.srec target/bios.sr.bin
 
 target/%.s: %.s | target
 	cat cpm_defs.s $< | sed -e 's/\.include\s*"\(.*\)"/include(`\1'"'"')/' \

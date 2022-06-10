@@ -39,8 +39,8 @@ srec_start:         incbin "../cpmfs/target/boot15k.sr.bin"
 srec_end:      
 srec_length = srec_end - srec_start
 
-boot_start:         incbin "../bios/target/bios.sr.bin" 
-boot_end:      
-boot_length = boot_end - boot_start
+bios_start:         incbin "../bios/target/bios.sr.bin" 
+bios_end:      
+bios_length = bios_end - bios_start
 
 strBootMsg:         dc.b   "CPM-68k BOOT manager for rosco_m68k v0.1", 0
