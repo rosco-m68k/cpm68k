@@ -34,12 +34,12 @@ in_2:               LEA       handler,%A0
                     LEA       strInit,%A0                             | Display initialisation string
                     BSR       puts
 
-                    MOVE.W    #0x0D,%D0
+                    MOVE.L    #0x0D,%D0
                     BSR       conOut
-                    MOVE.W    #0x0A,%D0
+                    MOVE.L    #0x0A,%D0
                     BSR       conOut
 
-                    MOVE.W    #SPI_CHECK,%D0                          | Check SD Card support
+                    MOVE.L    #SPI_CHECK,%D0                          | Check SD Card support
                     TRAP      #SPI_TRAP
                     CMP.L     #0x1234FEDC,%D0                         | Check magic return value
                     BEQ       in_3
@@ -47,7 +47,7 @@ in_2:               LEA       handler,%A0
                     LEA       errNoSDCardMsg,%A0                      | Display error message, but continue ...
                     BSR       puts
 
-in_3:               MOVE.W    #SPI_INIT,%D0                           | Get SD Card details
+in_3:               MOVE.L    #SPI_INIT,%D0                           | Get SD Card details
                     LEA       SD_CARD,%A1 
                     TRAP      #SPI_TRAP
                     CMP.L     #0,%D0
@@ -65,10 +65,6 @@ in_4:
 *--------------------------------------------------------------------------------
 handler:            CMPI.W    #funcCount,%D0
                     BCC       h1
-
-                    *LEA.L   strMsg,%A0
-                    *MOVE.L  #1,%D1
-                    *TRAP #14
 
                     EXT.L     %D0
                     LSL.L     #2,%D0                                  | multiply bios function by 4
@@ -493,7 +489,7 @@ strMsg:             .ascii   "BIOS called"
 errNoSDCardMsg:     .ascii    "Error: No SD Card Support detected"
                     DC.B      0
 
-errSDCardInitMsg:   .ascii    "Error: Failed to start SD Card support"
+errSDCardInitMsg:   .ascii    "Error: Failed to detect SD Card"
                     DC.B      0
 
 SD_CARD:            DS.B      50 | Hack, this is longer than required

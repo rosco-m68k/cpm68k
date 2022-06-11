@@ -28,8 +28,8 @@ To start under mame: ./sbc rosco_classicv2 -quik ../rosco-cpm68k/boot/target/boo
 This assumes mame stored at the same directory level as rosco-cpm68k and the command issued from the mame directory. Running mame on my PC is slower than the hardware (it reports a 68010 running at 3.7MHz), so I suggest immediately setting a breakpoint at 15000 ("bp 15000") and start execution ("go").  Mame will then stop at the cpm entry point (15000 or "cpm" in CPM15000.MAP).
 
 At the time of writing:
-- screen print messages are called in the bios, but nothing appears on the screen.  I assume this could be either a) a trivial trap mapping error in the bios or b) somehow I've trashed the rosco standard libraries between 400 and 2000 ..
-- the program is executing through the cpm code and bios but evenually has an illegal memory access and the rosco warm boots in an infinite loop.  This may be because mame is missing full support for sd cards, however it also doesnt work when I run on a real machine .. so maybe that's not the issue. I think cpm is trying to attach disks when the issue occurs ..
+- printing to the screen works !  I had confused D0 and D1 in bios.s ... Sigh
+- the program is executing through the cpm code and bios but fails to recognise the sd card
 
 The file CPM15000.MAP is the function/address map for cpm68k.  This is very useful to trace which function in cpm are being called etc.
 
