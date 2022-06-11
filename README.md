@@ -4,7 +4,9 @@ This project implements cpm-68k on the rosco_m68k single board computer.  At the
 
 ### My development environment:
 Windows 11 machine running VirtualBox 6.1 and Ubuntu 21.1
+
 rosco development toolchain from: https://rosco-m68k.com/docs/toolchain-installation
+
 mame emulator from here: https://github.com/roscopeco/mame
 
 Mame is extremely useful (i.e. essential) so you can run the debugger and trace the execution through the boot loader and cpm.
