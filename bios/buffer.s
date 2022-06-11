@@ -312,7 +312,7 @@ readHDDSectors:     LINK      %A6,#0
 
                     MOVE.L    0x0C(%A6),%A0                           | Destination address
 
-                    MOVE.W    #SPI_READ,%D0
+                    MOVE.L    #SPI_READ,%D0
                     TRAP      #SPI_TRAP
 
                     MOVEM.L   (%SP)+,%D0-%D2/%A0-%A2
@@ -332,7 +332,7 @@ writeHDDSector:     MOVEM.L   %D0-%D4/%A0-%A2,-(%SP)
                     LSR.L     #8,%D2                                  | Drive into lower byte of upper word
                     MOVE.W    #1,%D2                                  | Sectors to write in lower word
 
-                    MOVE.W    #SPI_WRITE,%D0
+                    MOVE.L    #SPI_WRITE,%D0
                     TRAP      #SPI_TRAP
 
                     MOVEM.L   (%SP)+,%D0-%D4/%A0-%A2

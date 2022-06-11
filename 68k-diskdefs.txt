@@ -1,0 +1,121 @@
+#----------------------------------------
+# 10 x 4mb partitions
+#----------------------------------------
+diskdef 4mb-hd-0
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  os 2.2
+end
+
+diskdef 4mb-hd-1
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 1024t
+  os 2.2
+end
+
+diskdef 4mb-hd-2
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 2048t
+  os 2.2
+end
+
+diskdef 4mb-hd-3
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 3072t
+  os 2.2
+end
+
+diskdef 4mb-hd-4
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 4096t
+  os 2.2
+end
+
+diskdef 4mb-hd-5
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 5120t
+  os 2.2
+end
+
+diskdef 4mb-hd-6
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 6144t
+  os 2.2
+end
+
+diskdef 4mb-hd-7
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 7168t
+  os 2.2
+end
+
+diskdef 4mb-hd-8
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 8192t
+  os 2.2
+end
+
+diskdef 4mb-hd-9
+  seclen 128
+  tracks 1024
+  sectrk 32
+  blocksize 2048
+  maxdir 256
+  skew 1
+  boottrk 0
+  offset 9216t
+  os 2.2
+end
