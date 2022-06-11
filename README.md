@@ -25,7 +25,7 @@ After building and creating your cpm68k sd card, start the rosco_m68k with the s
 
 To start under mame: ./sbc rosco_classicv2 -quik ../rosco-cpm68k/boot/target/boot.bin -debug
 
-This assumes mame stored at the same directory level as rosco-cpm68k and the command issued from the mame directory.
+This assumes mame stored at the same directory level as rosco-cpm68k and the command issued from the mame directory. Running mame on my PC is slower than the hardware (it reports a 68010 running at 3.7MHz), so I suggest immediately setting a breakpoint at 15000 ("bp 15000") and start execution ("go").  Mame will then stop at the cpm entry point (15000 or "cpm" in CPM15000.MAP).
 
 At the time of writing:
 - screen print messages are called in the bios, but nothing appears on the screen.  I assume this could be either a) a trivial trap mapping error in the bios or b) somehow I've trashed the rosco standard libraries between 400 and 2000 ..

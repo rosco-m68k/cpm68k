@@ -43,4 +43,4 @@ bios_start:         incbin "../bios/target/bios.sr.bin"
 bios_end:      
 bios_length = bios_end - bios_start
 
-strBootMsg:         dc.b   "CPM-68k BOOT manager for rosco_m68k v0.1", 0
+strBootMsg:         dc.b   "CPM-68k loader for rosco_m68k v0.1", 0

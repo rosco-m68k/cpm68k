@@ -26,17 +26,17 @@ in_2:               LEA       handler,%A0
                     MOVE.L    %A0,TRAP_3                              | set up trap #3 handler
                     BSR       initBuffers                             | Initialise the disk buffers
 
-                    MOVE.W    #0x0D,%D1
+                    MOVE.L    #0x0D,%D0
                     BSR       conOut
-                    MOVE.W    #0x0A,%D1
-                    BSR       conOut
+                    MOVE.L    #0x0A,%D0
+                    BSR       conOut                    
 
                     LEA       strInit,%A0                             | Display initialisation string
                     BSR       puts
 
-                    MOVE.W    #0x0D,%D1
+                    MOVE.W    #0x0D,%D0
                     BSR       conOut
-                    MOVE.W    #0x0A,%D1
+                    MOVE.W    #0x0A,%D0
                     BSR       conOut
 
                     MOVE.W    #SPI_CHECK,%D0                          | Check SD Card support
@@ -66,9 +66,9 @@ in_4:
 handler:            CMPI.W    #funcCount,%D0
                     BCC       h1
 
-                    LEA.L   strMsg,%A0
-                    MOVE.L  #1,%D1
-                    TRAP #14
+                    *LEA.L   strMsg,%A0
+                    *MOVE.L  #1,%D1
+                    *TRAP #14
 
                     EXT.L     %D0
                     LSL.L     #2,%D0                                  | multiply bios function by 4
@@ -117,7 +117,7 @@ warmBoot:           JMP       _ccp
 * Function 2: Console status.
 * Is character available? Yes %D0 = 1, No %D0 = 0
 *--------------------------------------------------------------------------------
-conStatus:          MOVE.W    #IO_CHECKCHAR,%D0
+conStatus:          MOVE.W    #IO_CHECKCHAR,%D1
                     TRAP      #IO_TRAP
                     RTS
 
@@ -125,7 +125,7 @@ conStatus:          MOVE.W    #IO_CHECKCHAR,%D0
 * Function 3: Read console character
 * Wait until a character is available, return in %D0
 *--------------------------------------------------------------------------------
-conIn:              MOVE.W    #IO_RECVCHAR,%D0
+conIn:              MOVE.W    #IO_RECVCHAR,%D1
                     TRAP      #IO_TRAP
                     RTS
 
@@ -133,7 +133,7 @@ conIn:              MOVE.W    #IO_RECVCHAR,%D0
 * Function 4: Write console character
 * Write the character in %D1 to the console
 *--------------------------------------------------------------------------------
-conOut:             MOVE.W    #IO_SENDCHAR,%D0
+conOut:             MOVE.W    #IO_SENDCHAR,%D1
                     TRAP      #IO_TRAP
                     RTS
 
@@ -315,8 +315,8 @@ sh1:                RTS
 *--------------------------------------------------------------------------------
 * Display the string pointed to by %A0
 *--------------------------------------------------------------------------------
-puts:               MOVE.B    (%A0)+,%D1
-                    CMPI.B    #0,%D1
+puts:               MOVE.B    (%A0)+,%D0
+                    CMPI.B    #0,%D0
                     BEQ       p1
                     BSR       conOut
                     BRA       puts
@@ -478,11 +478,11 @@ allocV9:            DS.B      2048
                     .even
 
           .ifne               _GNU_
-strInit:            .ascii    "CPM68k boot manager for rosco_m68k v0.1 [GNU]"
+strInit:            .ascii    "CPM68k bios for rosco_m68k v0.1 [GNU]"
           .endif
 
           .ifne               _CPM_
-strInit:            .ascii    "CPM68k boot manager for rosco_m68k v0.1 [CPM]"
+strInit:            .ascii    "CPM68k bios for rosco_m68k v0.1 [CPM]"
           .endif
 
                     DC.B      0
