@@ -23,11 +23,18 @@ boot - the boot loader - this generates boot.bin which is the program used to st
 
 After building and creating your cpm68k sd card, start the rosco_m68k with the sd card installed.  The normal rosco boot program will say that the sd card format isnt recognised but you can continue and use the kermit program to start boot.bin.
 
+To start under mame: ./sbc rosco_classicv2 -quik ../rosco-cpm68k/boot/target/boot.bin -debug
+
+This assumes mame stored at the same directory level as rosco-cpm68k and the command issued from the mame directory.
+
 At the time of writing:
 - screen print messages are called in the bios, but nothing appears on the screen.  I assume this could be either a) a trivial trap mapping error in the bios or b) somehow I've trashed the rosco standard libraries between 400 and 2000 ..
 - the program is executing through the cpm code and bios but evenually has an illegal memory access and the rosco warm boots in an infinite loop.  This may be because mame is missing full support for sd cards, however it also doesnt work when I run on a real machine .. so maybe that's not the issue. I think cpm is trying to attach disks when the issue occurs ..
 
 The file CPM15000.MAP is the function/address map for cpm68k.  This is very useful to trace which function in cpm are being called etc.
+
+
+My next step is to change the bios code to get it to print details of every bios call that is being made ..
 
 ### Interesting links:
 

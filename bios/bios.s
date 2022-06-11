@@ -65,6 +65,11 @@ in_4:
 *--------------------------------------------------------------------------------
 handler:            CMPI.W    #funcCount,%D0
                     BCC       h1
+
+                    LEA.L   strMsg,%A0
+                    MOVE.L  #1,%D1
+                    TRAP #14
+
                     EXT.L     %D0
                     LSL.L     #2,%D0                                  | multiply bios function by 4
                     LEA       fTable,%A0                              | Get offset into table
@@ -480,6 +485,9 @@ strInit:            .ascii    "CPM68k boot manager for rosco_m68k v0.1 [GNU]"
 strInit:            .ascii    "CPM68k boot manager for rosco_m68k v0.1 [CPM]"
           .endif
 
+                    DC.B      0
+
+strMsg:             .ascii   "BIOS called"
                     DC.B      0
 
 errNoSDCardMsg:     .ascii    "Error: No SD Card Support detected"
