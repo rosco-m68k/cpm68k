@@ -328,8 +328,8 @@ selDrive:           .byte     0xff                                    | drive re
 
                     .even
 memTable:           .word     1                                       | 1 memory region - TPA only
-tpaStart:           .long     0x100000                                | Default: Start of the Transient Program Area
-tpaSize:            .long     0xEB0000                                | Default: Size of the Transient Program Area
+tpaStart:           .long     0x002000                                | Default: Start of the Transient Program Area
+tpaSize:            .long     0x012000                                | Default: Size of the Transient Program Area
 
 *-----------------------------------------------------------------------------------------------------
 * disk parameter headers
