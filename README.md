@@ -23,7 +23,7 @@ sudo cat 68k-diskdefs.txt >> /etc/cpmtools/diskdefs.txt
 
 Type 'make' in the top level directory, this will use the makefile in lower directories to build:
 
-bios - the bios - this will build the bios.sr.bin file which is a modification of David Wildie's bios that assume the rosco support code is loaded and maps the cpm bios calls to the correct TRAP 13, 14, 15 calls.
+bios - the bios - this will build the bios.sr.bin file which is a modification of Damian Wildie's bios that assume the rosco support code is loaded and maps the cpm bios calls to the correct TRAP 13, 14, 15 calls.
 
 cpmfs - this will create disk1.img a cpm68k disk image.  Use Balena Etcher of similar to format a sd card with this image.
 
