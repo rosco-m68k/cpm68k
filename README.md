@@ -49,7 +49,7 @@ My next step is to change the bios code to get it to print details of every bios
 Details on the board:
 https://rosco-m68k.com/
 
-Links to documents on cpm68k and David Wildie's work on a S100 SBC on which this code is derived.
+Links to documents on cpm68k and Damian Wildie's work on a S100 SBC on which this code is derived.
 http://www.s100computers.com/Software%20Folder/CPM68K/CPM68K%20Software.htm
 https://github.com/dwildie/cpm-68k
 
